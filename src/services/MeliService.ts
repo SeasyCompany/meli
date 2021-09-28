@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'querystring'
 import { errorHandler } from '@vmotta8/price-comparison'
 import { ISearchProducts } from '../dtos'
 
@@ -8,7 +9,7 @@ export const MeliService = {
 
     try {
       const response = await axios.get<ISearchProducts>(
-        `${meliUrl}/search?q=${product}`
+        `${meliUrl}/search?${qs.stringify({ q: product })}&limit=15`
       )
 
       return response.data
