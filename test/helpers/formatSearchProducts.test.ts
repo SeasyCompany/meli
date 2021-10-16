@@ -3,7 +3,7 @@ import { formatSearchProducts } from '../../src/helpers'
 
 describe('formatSearchProducts', () => {
   it('should return formatted products', () => {
-    const products = formatSearchProducts(ProductsSearchMock.results)
+    const products = formatSearchProducts(ProductsSearchMock)
     expect(products[0].url.split('-').length).toEqual(10)
 
     const productKeys = Object.keys(products[0])

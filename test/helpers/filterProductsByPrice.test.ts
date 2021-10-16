@@ -3,7 +3,7 @@ import { formatSearchProducts, filterProductsByPrice } from '../../src/helpers'
 
 describe('filterProductsByPrice', () => {
   it('should return filtered products', () => {
-    const formattedProducts = formatSearchProducts(ProductsSearchMock.results)
+    const formattedProducts = formatSearchProducts(ProductsSearchMock)
     const filteredProducts = filterProductsByPrice(formattedProducts)
     expect(filteredProducts.length).toEqual(10)
   })
