@@ -42,6 +42,10 @@ functions:
               - ${self:custom.Cognito.scopes}
 
 custom:
+  serverless-offline:
+    httpPort: 4200
+    websocketPort: 4201
+    lambdaPort: 4202
   bundle:
     linting: false
   Cognito:
