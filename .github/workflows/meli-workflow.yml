@@ -15,7 +15,6 @@ jobs:
         MELI_URL: ${{ secrets.MELI_URL }}
         COGNITO_ARN: ${{ secrets.COGNITO_ARN }}
         COGNITO_SCOPES: ${{ secrets.COGNITO_SCOPES }}
-        directory: .
         file_name: .env
         fail_on_empty: false
 
