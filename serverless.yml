@@ -10,7 +10,7 @@ provider:
   region: us-east-1
   apiGateway:
     shouldStartNameWithService: true
-  stage: local
+  stage: ${env:NODE_ENV}
   environment:
     MELI_URL: ${env:MELI_URL}
   
