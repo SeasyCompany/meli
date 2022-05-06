@@ -1,6 +1,6 @@
 name: Meli workflow
 
-on: ['push', 'pull_request']
+on: ['push']
 
 jobs:
   build:
@@ -46,6 +46,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+
       - name: Create env file
         run: |
           touch .env
@@ -53,10 +57,6 @@ jobs:
           echo COGNITO_ARN=${{secrets.COGNITO_ARN}} >> .env
           echo COGNITO_SCOPES=${{secrets.COGNITO_SCOPES}} >> .env
           echo MELI_URL=${{secrets.MELI_URL}} >> .env
-
-      - name: Install dependencies
-        run: |
-          yarn --frozen-lockfile
 
       - name: Serverless deploy
         uses: serverless/github-action@v2
