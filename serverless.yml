@@ -41,6 +41,10 @@ functions:
             scopes:
               - ${env:COGNITO_SCOPES}
 
+package:
+  exclude:
+    - node_modules/**
+
 custom:
   serverless-offline:
     httpPort: 4200
