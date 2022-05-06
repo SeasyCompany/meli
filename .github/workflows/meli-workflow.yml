@@ -39,14 +39,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Make env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          MELI_URL: ${{ secrets.MELI_URL }}
-          COGNITO_ARN: ${{ secrets.COGNITO_ARN }}
-          COGNITO_SCOPES: ${{ secrets.COGNITO_SCOPES }}
+          envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
+          envkey_MELI_URL: ${{ secrets.MELI_URL }}
+          envkey_COGNITO_ARN: ${{ secrets.COGNITO_ARN }}
+          envkey_COGNITO_SCOPES: ${{ secrets.COGNITO_SCOPES }}
           file_name: .env
           fail_on_empty: false
 
