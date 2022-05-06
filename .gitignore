@@ -1,6 +1,4 @@
 .DS_Store
-env.local.yml
-env.dev.yml
 .env
 
 # package directories
