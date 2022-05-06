@@ -1,5 +1,7 @@
 service: meli
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs14.x
@@ -10,9 +12,7 @@ provider:
     shouldStartNameWithService: true
   stage: local
   environment:
-    COGNITO_AUTHORIZATION: ${self:custom.Cognito.authorization}
-    COGNITO_URL: ${self:custom.Cognito.url}
-    MELI_URL: ${self:custom.Meli.url}
+    MELI_URL: ${env:MELI_URL}
   
 functions:
   hello:
@@ -22,9 +22,9 @@ functions:
           method: GET
           path: /hello
           authorizer:
-            arn: ${self:custom.Cognito.arn}
+            arn: ${env:COGNITO_ARN}
             scopes:
-              - ${self:custom.Cognito.scopes}
+              - ${env:COGNITO_SCOPES}
 
   searchproducts:
     handler: dist/src/handlers/index.searchproducts
@@ -37,9 +37,9 @@ functions:
               querystrings:
                 product: true
           authorizer:
-            arn: ${self:custom.Cognito.arn}
+            arn: ${env:COGNITO_ARN}
             scopes:
-              - ${self:custom.Cognito.scopes}
+              - ${env:COGNITO_SCOPES}
 
 custom:
   serverless-offline:
@@ -48,13 +48,7 @@ custom:
     lambdaPort: 4202
   bundle:
     linting: false
-  Cognito:
-    arn: ${file(env.${self:provider.stage}.yml):Cognito.arn}
-    scopes: ${file(env.${self:provider.stage}.yml):Cognito.scopes}
-    url: ${file(env.${self:provider.stage}.yml):Cognito.url}
-    authorization: ${file(env.${self:provider.stage}.yml):Cognito.authorization}
-  Meli:
-    url: ${file(env.${self:provider.stage}.yml):Meli.url}
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-offline
