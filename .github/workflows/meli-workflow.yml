@@ -4,7 +4,6 @@ on: ['push', 'pull_request']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -29,3 +28,31 @@ jobs:
       - name: Run all tests
         run: |
           yarn test
+  
+  deploy:
+    if: github.ref == 'refs/heads/development'
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+
+      - name: Serverless deploy
+        uses: serverless/github-action@v2
+        with:
+          args: deploy
+        env:
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
