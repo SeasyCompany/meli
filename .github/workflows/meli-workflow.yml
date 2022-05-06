@@ -31,6 +31,7 @@ jobs:
   
   deploy:
     if: github.ref == 'refs/heads/development'
+    environment: dev
 
     runs-on: ubuntu-latest
     strategy:
