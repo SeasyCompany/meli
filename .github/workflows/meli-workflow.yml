@@ -3,6 +3,22 @@ name: Meli workflow
 on: ['push', 'pull_request']
 
 jobs:
+
+  envfile:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Make env file
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        NODE_ENV: ${{ secrets.NODE_ENV }}
+        MELI_URL: ${{ secrets.MELI_URL }}
+        COGNITO_ARN: ${{ secrets.COGNITO_ARN }}
+        COGNITO_SCOPES: ${{ secrets.COGNITO_SCOPES }}
+        directory: .
+        file_name: .env
+        fail_on_empty: false
+
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -54,9 +70,5 @@ jobs:
         with:
           args: deploy
         env:
-          NODE_ENV: ${{ secrets.NODE_ENV }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          MELI_URL: ${{ secrets.MELI_URL }}
-          COGNITO_ARN: ${{ secrets.COGNITO_ARN }}
-          COGNITO_SCOPES: ${{ secrets.COGNITO_SCOPES }}
