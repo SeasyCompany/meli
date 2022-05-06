@@ -50,6 +50,10 @@ jobs:
         run: |
           yarn --frozen-lockfile
 
+      - name: Build application
+        run: |
+          yarn build
+
       - name: Create env file
         run: |
           touch .env
