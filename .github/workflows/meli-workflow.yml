@@ -48,11 +48,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn --frozen-lockfile
+          yarn install:development
 
       - name: Build application
         run: |
           yarn build
+
+      - name: Install production dependencies
+        run: |
+          yarn install:production
 
       - name: Create env file
         run: |
