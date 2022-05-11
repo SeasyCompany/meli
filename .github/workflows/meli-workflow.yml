@@ -46,13 +46,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
+      - name: Install development dependencies
         run: |
           yarn install:development
 
       - name: Build application
         run: |
           yarn build
+
+      - name: Remove local plugins
+        run: |
+          yq eval -i 'del(.plugins)' serverless.yml
 
       - name: Install production dependencies
         run: |
